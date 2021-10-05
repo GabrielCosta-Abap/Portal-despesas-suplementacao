@@ -1,0 +1,46 @@
+<core:FragmentDefinition xmlns:mvc="sap.ui.core.mvc"
+    displayBlock="true"
+    xmlns="sap.m"
+    xmlns:l="sap.ui.layout"
+    xmlns:f="sap.ui.layout.form"
+    xmlns:core="sap.ui.core"
+    xmlns:table="sap.ui.table"
+    xmlns:commons="sap.ui.commons"
+    xmlns:smartField="sap.ui.comp.smartfield"
+    xmlns:comp="sap.ui.comp"
+    xmlns:u="sap.ui.unified">
+
+    <!-- items="{/sh_ccSet}" -->
+    <TableSelectDialog  confirm="handleCcHelpConfirm"
+						search=".handleCcHelpSearch"
+                       items="{oCContabModel>/oCContabSet}">
+        <columns>
+            <Column >
+                <Text text="Nº da Conta Contábil"></Text>
+            </Column>
+            <Column >
+                <Text text="Descrição da Conta Contábil"></Text>
+            </Column>
+            <Column >
+                <Text text="Ordem"></Text>
+            </Column>
+        </columns>
+
+        <items>
+            <ColumnListItem>
+                <cells>
+                    <Text text="{oCContabModel>Saknr}"></Text>
+                </cells>
+                <cells>
+                    <Text text="{oCContabModel>Txt50}"></Text>
+                </cells>
+                <cells>
+                    <Text text="{oCContabModel>Aufnr}"></Text>
+                </cells>
+            </ColumnListItem>
+        </items>
+
+    </TableSelectDialog>
+
+
+</core:FragmentDefinition>

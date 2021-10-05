@@ -1,0 +1,207 @@
+<mvc:View controllerName="queroquerons.suplementacao.controller.Suplemen"
+    xmlns:mvc="sap.ui.core.mvc"
+    displayBlock="true"
+    xmlns="sap.m"
+	class="sapUiSizeCompact"
+    xmlns:l="sap.ui.layout"
+    xmlns:f="sap.ui.layout.form"
+    xmlns:core="sap.ui.core"
+    xmlns:table="sap.ui.table"
+    xmlns:commons="sap.ui.commons">
+
+    <Shell id="shell"
+        appWidthLimited="false">
+        <App id="app">
+            <pages>
+                <Page id="page"
+                    title="Portal Despesas Lojas Quero-Quero"
+                    showHeader="true">
+
+                    <HBox justifyContent="End">
+                        <f:SimpleForm>
+                            <f:content>
+                                <Label text="{i18n>orcamento} Solicitado"></Label>
+                                <Input editable="false" id="inputTotalOrcamento"
+                                    value=""></Input>
+                            </f:content>
+                        </f:SimpleForm>
+                    </HBox>
+					
+                    <f:SimpleForm id="formItensSuplemen" title="">
+                    </f:SimpleForm>
+                    <Table id="idTableSuplemen"
+						items="{SuplemenModel>/SuplemenSet}"
+                        mode="None">
+                        <columns>
+                            <Column minScreenWidth="Tablet"
+                                demandPopin="true"								
+								visible="false"								
+                                hAlign="Center">
+                                <Text text="Numero {i18n>solicitacao}"/>
+                            </Column>
+                            <Column minScreenWidth="Tablet"
+                                demandPopin="true"	
+								width="5%"								
+                                hAlign="Center">
+                                <Text text="Item"/>
+                            </Column>
+                            <Column minScreenWidth="Tablet"
+                                demandPopin="true"
+                                hAlign="Center">
+                                <Text text="Empresa"/>
+                            </Column>
+                            <Column minScreenWidth="Tablet"
+                                demandPopin="true"
+								width="11%"
+                                hAlign="Center">
+                                <Text text="Data Documento"/>
+                            </Column>
+                            <Column minScreenWidth="Tablet"
+                                demandPopin="true"
+                                hAlign="Center"
+								width="13%">
+                                <Text text="Conta {i18n>suplementacao}"/>
+                            </Column>
+                            <Column minScreenWidth="Tablet"
+                                demandPopin="true"
+								width="20%"
+                                hAlign="Center">
+                                <Text text="Desc. Conta"/>
+                            </Column>
+							<Column minScreenWidth="Tablet"
+                                demandPopin="true"
+								width="8%"
+                                hAlign="Center">
+                                <Text text="Cod. Aprov."/>
+                            </Column>
+                            <Column minScreenWidth="Tablet"
+                                demandPopin="true"
+                                hAlign="Center"
+                                width="13%">
+                                <Text text="C. Custo {i18n>suplementacao}"/>
+                            </Column>
+                            <Column minScreenWidth="Tablet"
+                                demandPopin="true"
+                                hAlign="Center">
+                                <Text text="Montante"/>
+                            </Column>
+                            <Column minScreenWidth="Tablet"
+                                demandPopin="true"
+								width="6%"
+                                hAlign="Center">
+                                <Text text="Mais"/>
+                            </Column>
+							<Column minScreenWidth="Tablet"
+                                demandPopin="true"
+								width="6%"
+                                hAlign="Center">
+                                <Text text="Deletar"/>
+                            </Column>
+                        </columns>
+                        <items>
+                            <ColumnListItem  >
+                                <cells >
+                                    <Input value=""/>
+                                    <Input value="{SuplemenModel>Buzei}" editable="false"/>
+                                    <Input
+										editable="{SuplemenModel>ScreenEnabled}"
+										placeholder=""										
+										showSuggestion="true"
+										valueHelpOnly="true"
+										showValueHelp="true"										
+										valueHelpRequest=".onValueHelpBukrs"
+										value="{SuplemenModel>Bukrs}"
+									/>
+                                    <DatePicker
+										editable="{SuplemenModel>ScreenEnabled}"
+										valueFormat="dd.MM.yyyy"
+										value="{SuplemenModel>Bldat}"
+										displayFormat="short"
+										placeholder=" "
+										/>
+                                    <Input showSuggestion="true"
+										editable="{SuplemenModel>ScreenEnabled}"
+                                        showValueHelp="true"
+										value="{SuplemenModel>Kssup}"
+										valueHelpOnly="true"
+                                        valueHelpRequest=".onCContabMatchCode">
+                                        <suggestionItems>
+                                            <core:Item />
+                                        </suggestionItems>
+                                    </Input>
+                                    <Input  value="{SuplemenModel>KssupTxt}" editable="false"/>
+									<Input value="{SuplemenModel>Pargb}" editable="false"/>
+                                    <Input showSuggestion="true"
+										editable="{SuplemenModel>ScreenEnabled}"
+										value="{SuplemenModel>Kosup}"
+                                        showValueHelp="true"
+										valueHelpOnly="true"
+                                        valueHelpRequest="onSearchKostl">
+                                        <suggestionItems>
+                                            <core:Item />
+                                        </suggestionItems>
+                                    </Input>									
+                                    <Input editable="{SuplemenModel>ScreenEnabled}" value="{
+												path: 'SuplemenModel>Wrbtr',
+												formatOptions: { minIntegerDigits: 1, minFractionDigits: 3, maxFractionDigits: 3, groupingEnabled: true, groupingSeparator: '.', decimalSeparator: ',' }
+											}" submit=".updateSum"/>
+                                    <core:Icon src="sap-icon://add"
+                                        press="onAddNewLine" visible="{SuplemenModel>ScreenEnabled}" />
+									<core:Icon src="sap-icon://delete"
+                                        press="onRemoveLine" visible="{SuplemenModel>ScreenEnabled}"/>
+                                </cells>
+                            </ColumnListItem>
+
+
+                        </items>
+                    </Table>
+                    <Table id="idTableSuplemen2"
+						items="{SuplemenModel>/SuplemenSet}"
+                        mode="None">
+                        <columns>
+                            <Column minScreenWidth="Tablet"
+                                demandPopin="true"	
+								width="5%"								
+                                hAlign="Center">
+                                <Text text="Item"/>
+                            </Column>
+                            <Column minScreenWidth="Tablet"
+                                demandPopin="true"
+								width="90%"	
+                                hAlign="Center">
+                                <Text text="Justificativa Suplemento"/>
+                            </Column>
+                        </columns>
+                        <items>
+                            <ColumnListItem  >
+                                <cells >
+                                    <Input value="{SuplemenModel>Buzei}" editable="false"/>
+                                    <Input editable="{SuplemenModel>ScreenEnabled}" value="{SuplemenModel>Sgtxt}"/>
+                                </cells>
+                            </ColumnListItem>
+                        </items>
+                    </Table>
+                    <footer>
+                        <Toolbar>
+                            <ToolbarSpacer/>
+							<Button text="Voltar"
+                                type="Back"
+                                press="onVoltar">
+                            </Button>
+                            <Button text="Salvar"
+                                type="Emphasized"
+								id="btnSuplemenSalvar"
+                                press="onSalvar">
+                            </Button>
+                            <Button text="Cancelar"
+								id="btnSuplemenCanc"
+								visible="false"
+                                press="onCancelar">
+                            </Button>
+                        </Toolbar>
+                    </footer>
+                </Page>
+            </pages>
+        </App>
+    </Shell>
+</mvc:View>

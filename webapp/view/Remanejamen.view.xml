@@ -1,0 +1,261 @@
+<mvc:View controllerName="queroquerons.suplementacao.controller.Remanejamen"
+     xmlns:mvc="sap.ui.core.mvc"
+    displayBlock="true"
+    xmlns="sap.m"
+	class="sapUiSizeCompact"
+    xmlns:l="sap.ui.layout"
+    xmlns:f="sap.ui.layout.form"
+    xmlns:core="sap.ui.core"
+    xmlns:table="sap.ui.table"
+    xmlns:commons="sap.ui.commons">
+
+    <Shell id="shell"
+        appWidthLimited="false">
+        <App id="app">
+            <pages>
+                <Page id="page"
+                    title="Portal Despesas Lojas Quero-Quero"
+                    showHeader="true">
+
+                   <HBox justifyContent="End">
+                        <f:SimpleForm>
+                            <f:content>
+                                <Label text="{i18n>orcamento} Solicitado"></Label>
+                                <Input editable="false" id="inputTotalOrcamentoReman"
+                                    value=""></Input>
+                            </f:content>
+                        </f:SimpleForm>
+                    </HBox>
+
+					<f:SimpleForm id="formItensRemanej" title="">
+					</f:SimpleForm>
+                   <Table id="idTableRemanej"
+						items="{RemanejModel>/RemanejSet}"
+                        mode="None">
+                        <columns>
+                            <Column minScreenWidth="Tablet"
+                                demandPopin="true"	
+								width="4%"								
+                                hAlign="Center">
+                                <Text text="Item"/>
+                            </Column>
+                            <Column minScreenWidth="Tablet"
+                                demandPopin="true"
+								width="7%"
+                                hAlign="Center">
+                                <Text text="Empresa"/>
+                            </Column>
+                            <Column minScreenWidth="Tablet"
+                                demandPopin="true"
+								width="10%"
+                                hAlign="Center">
+                                <Text text="Data Documento"/>
+                            </Column>
+                            <Column minScreenWidth="Tablet"
+                                demandPopin="true"
+                                hAlign="Center"
+								width="11%">
+                                <Text text="Conta de saída"/>
+                            </Column>
+                            <Column minScreenWidth="Tablet"
+                                demandPopin="true"
+								width="18%"
+                                hAlign="Center">
+                                <Text text="Desc. Conta Saída"/>
+                            </Column>
+							<Column minScreenWidth="Tablet"
+                                demandPopin="true"
+								width="5%"
+                                hAlign="Center">
+                                <Text text="Cod. Aprov."/>
+                            </Column>
+                            <Column minScreenWidth="Tablet"
+                                demandPopin="true"
+                                hAlign="Center"
+                                width="12%">
+                                <Text text="CC Saída"/>
+                            </Column>							
+                            <Column minScreenWidth="Tablet"
+                                demandPopin="true"
+								width="4%"
+                                hAlign="Center">
+                                <Text text="Mais"/>
+                            </Column>
+							<Column minScreenWidth="Tablet"
+                                demandPopin="true"
+								width="4%"
+                                hAlign="Center">
+                                <Text text="Deletar"/>
+                            </Column>
+                        </columns>
+                        <items>
+                            <ColumnListItem  >
+                                <cells >
+                                    <Input
+										value="{RemanejModel>Buzei}"
+										editable="false"/>
+                                    <Input
+										editable="{RemanejModel>ScreenEnabled}"
+										placeholder=""										
+										showSuggestion="true"
+										valueHelpOnly="true"
+										showValueHelp="true"										
+										valueHelpRequest=".onValueHelpBukrs"
+										value="{RemanejModel>Bukrs}"
+									/>
+                                    <DatePicker
+										editable="{RemanejModel>ScreenEnabled}"
+										valueFormat="dd.MM.yyyy"
+										value="{RemanejModel>Bldat}"
+										displayFormat="short"
+										placeholder=" "
+										/>
+                                    <Input
+										editable="{RemanejModel>ScreenEnabled}"
+										showSuggestion="true"
+                                        showValueHelp="true"
+										value="{RemanejModel>Ksdeb}"
+										valueHelpOnly="true"
+                                        valueHelpRequest=".onCContabMatchCode">
+                                        <suggestionItems>
+                                            <core:Item />
+                                        </suggestionItems>
+                                    </Input>
+                                    <Input
+										value="{RemanejModel>KsdebTxt}"
+										editable="false"/>
+									<Input
+										value="{RemanejModel>Pargb}"
+										editable="false"/>
+                                    <Input 	showSuggestion="true"
+											editable="{RemanejModel>ScreenEnabled}"
+											value="{RemanejModel>Kodeb}"
+											showValueHelp="true"
+											valueHelpOnly="true"
+											valueHelpRequest="onSearchKostl">
+                                        <suggestionItems>
+                                            <core:Item />
+                                        </suggestionItems>
+                                    </Input>									
+                                    <core:Icon
+										src="sap-icon://add"
+                                        visible="{oScreenModel>ScreenEnabled}"
+										press="onAddNewLine" />
+									<core:Icon
+										src="sap-icon://delete"
+                                        visible="{oScreenModel>ScreenEnabled}"
+										press="onRemoveLine" />
+                                </cells>
+                            </ColumnListItem>
+                        </items>
+					</Table>
+					<Table id="idTableRemanej2"
+						items="{RemanejModel>/RemanejSet}"
+                        mode="None">
+                        <columns>
+                            <Column minScreenWidth="Tablet"
+                                demandPopin="true"	
+								width="5%"								
+                                hAlign="Center">
+                                <Text text=""/>
+                            </Column>
+							<Column minScreenWidth="Tablet"
+                                demandPopin="true"
+                                hAlign="Center"
+								width="12%">
+                                <Text text="Conta de entrada"/>
+                            </Column>
+                            <Column minScreenWidth="Tablet"
+                                demandPopin="true"
+								width="20%"
+                                hAlign="Center">
+                                <Text text="Desc. Conta Entrada"/>
+                            </Column>							
+                            <Column minScreenWidth="Tablet"
+                                demandPopin="true"
+                                hAlign="Center"
+                                width="15%">
+                                <Text text="CC Entrada"/>
+                            </Column>
+                            <Column minScreenWidth="Tablet"
+                                demandPopin="true"
+								width="10%"
+                                hAlign="Center">
+                                <Text text="Montante"/>
+                            </Column>
+                            <Column minScreenWidth="Tablet"
+                                demandPopin="true"
+								width="30%"		
+                                hAlign="Center">
+                                <Text text="Justificativa Remanejo"/>
+                            </Column>
+                        </columns>
+                        <items>
+                            <ColumnListItem  >
+                                <cells >
+                                    <Input
+										value="{RemanejModel>Buzei}"
+										editable="false"/>
+									<Input
+										showSuggestion="true"
+										editable="{RemanejModel>ScreenEnabled}"
+                                        showValueHelp="true"
+										value="{RemanejModel>Kscre}"
+										valueHelpOnly="true"
+                                        valueHelpRequest=".onCContabMatchCode2">
+                                        <suggestionItems>
+                                            <core:Item />
+                                        </suggestionItems>
+                                    </Input>
+                                    <Input
+										value="{RemanejModel>KscreTxt}"
+										editable="false"/>
+									<Input
+										showSuggestion="true"
+										editable="{RemanejModel>ScreenEnabled}"
+										value="{RemanejModel>Kocre}"
+                                        showValueHelp="true"
+										valueHelpOnly="true"
+                                        valueHelpRequest="onSearchKostl2">
+                                        <suggestionItems>
+                                            <core:Item />
+                                        </suggestionItems>
+                                    </Input>									
+                                    <Input 	editable="{RemanejModel>ScreenEnabled}"
+											value="{
+												path: 'RemanejModel>Wrbtr',
+												formatOptions: { minIntegerDigits: 1, minFractionDigits: 3, maxFractionDigits: 3, groupingEnabled: true, groupingSeparator: '.', decimalSeparator: ',' }
+											}"
+											submit=".updateSum"/>											
+                                    <Input
+										editable="{RemanejModel>ScreenEnabled}"
+										value="{RemanejModel>Sgtxt}"/>
+                                </cells>
+                            </ColumnListItem>
+                        </items>
+                    </Table>
+					
+                    <footer>
+                        <Toolbar>
+                            <ToolbarSpacer/>
+							<Button text="Voltar"
+                                type="Back"
+                                press="onVoltar">
+                            </Button>
+                            <Button text="Salvar"
+                                type="Emphasized"
+								id="btnRemanejSalvar"
+                                press="onSalvar">
+                            </Button>
+                            <Button text="Cancelar"
+								id="btnRemanejCanc"
+								visible="false"
+                                press="onCancelar">
+                            </Button>
+                        </Toolbar>
+                    </footer>
+                </Page>
+            </pages>
+        </App>
+    </Shell>
+</mvc:View>

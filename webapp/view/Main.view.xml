@@ -1,0 +1,216 @@
+<mvc:View
+    controllerName="queroquerons.suplementacao.controller.Main"
+    xmlns:mvc="sap.ui.core.mvc"
+    displayBlock="true"
+	class="sapUiSizeCompact"
+	xmlns:core="sap.ui.core"
+    xmlns="sap.m"
+	xmlns:fb="sap.ui.comp.filterbar"
+>
+	<Shell id="shell">
+		<App id="app">
+			<pages>
+				<Page id="page"
+				title="{i18n>title}"
+				showNavButton="false"
+				navButtonPress="onNavBack">
+					<content>				
+				
+						<fb:FilterBar header="Utilizar filtro para pesquisa" reset="onReset" search="getOrcamento" showRestoreOnFB="true" showRestoreButton="true" showClearButton="true">
+							<fb:filterItems>													
+								<fb:FilterItem id="idFiltroEmpresa" name="FiltroEmpresa" label="Empresa">
+									<fb:control>
+										<Input
+											placeholder=""										
+											showSuggestion="true"
+											valueHelpOnly="false"
+											id="inputOrcamentoBukrs"
+											showValueHelp="true"										
+											valueHelpRequest=".onValueHelpBukrs"											
+										/>
+									</fb:control>									
+								</fb:FilterItem>
+
+								<fb:FilterItem id="idFiltroNumSol" name="FiltroNumSol" label="Número Solicitação">
+									<fb:control>
+										<Input
+											placeholder=""										
+											showSuggestion="true"
+											id="inputOrcamentoNumSol"
+										/>
+									</fb:control>									
+								</fb:FilterItem>								
+
+								<fb:FilterItem id="idFiltroDt" label="Data" name="FiltroData">
+									<fb:control>										
+										<DateRangeSelection
+											id="idDtOrcs"
+											displayFormat="short"
+											change="idDtCrDe"/>
+									</fb:control>
+								</fb:FilterItem>
+
+								<fb:FilterItem id="idFiltroCodAprov" name="FiltroCodAProv" label="Código Aprovação">
+									<fb:control>
+									
+										<Input
+											placeholder=""										
+											showSuggestion="true"
+											id="inputOrcamentoCodAprov"
+										/>
+									</fb:control>									
+								</fb:FilterItem>	
+
+								<fb:FilterItem id="idFiltroSolicitante" name="FiltroSolic" label="Solicitante">
+									<fb:control>
+										<Input
+											placeholder=""										
+											showSuggestion="true"
+											valueHelpOnly="false"
+											id="inputOrcamentoSolic"
+											showValueHelp="true"										
+											valueHelpRequest=".onMatriculaMatchCode"											
+										/>											
+									</fb:control>									
+								</fb:FilterItem>	
+
+								<fb:FilterItem id="idFiltroAprovador" name="FiltroAprovadoe" label="Aprovador">
+									<fb:control>
+										<Input
+											placeholder=""										
+											showSuggestion="true"
+											valueHelpOnly="false"
+											id="inputOrcamentoAprov"
+											showValueHelp="true"										
+											valueHelpRequest=".onMatriculaAprovMatchCode"											
+										/>											
+									</fb:control>									
+								</fb:FilterItem>	
+
+								<fb:FilterItem id="idFiltroStatus" name="FiltroStatus" label="Status">
+									<fb:control>
+										<Select id="idStatusInput">
+											<core:Item key="" text="Todos" />
+											<core:Item key="1" text="Pendente" />
+											<core:Item key="3" text="Rejeitado" />
+											<core:Item key="4" text="Cancelado" />
+											<core:Item key="2" text="Aprovado" />
+										</Select>
+									</fb:control>									
+								</fb:FilterItem>								
+
+						</fb:filterItems>
+				</fb:FilterBar>								
+
+				<!--<HBox>-->
+					<Table id="idTableOrcamento" inset="false" items="{OrcamentoModel>/OrcamentoSet}" >
+						<headerToolbar>
+							<OverflowToolbar>
+								<Title text="Orçamento" level="H3"/>							
+								<ToolbarSpacer></ToolbarSpacer>
+								<Button	icon="sap-icon://download" press="onDataExport" />
+							</OverflowToolbar>
+						</headerToolbar>
+						<columns >
+							<Column id="columnOrcamento1" width="12.2%" >
+								<Text text="Solicitação"/>
+							</Column>
+							<Column id="columnOrcamento2" width="9%" >
+								<Text text="Data" />
+							</Column>							
+							<Column id="columnOrcamento3" width="15.2%">
+								<Text text="Tipo"/>
+							</Column>
+							<Column id="columnOrcamento4" width="7%">
+								<Text text="Empresa" />
+							</Column>
+							<Column id="columnOrcamento5" >
+								<Text text="Cod Aprov" />
+							</Column>
+							<Column id="columnOrcamento6">
+								<Text text="Mês/Ano" />
+							</Column>
+							<Column id="columnOrcamento7" >
+								<Text text="Solicitante" />
+							</Column>							
+							<Column id="columnOrcamento8">
+								<Text text="Valor Total" />
+							</Column>
+							<Column id="columnOrcamento9">
+								<Text text="Status" />
+							</Column>
+							<!--<Column>
+								<Text text="Aprovador" />
+							</Column>-->
+							<Column id="columnOrcamento10" width="12.2%">
+								<Text text="Aprovador" />
+							</Column>															
+						</columns>
+
+						<!-- Incluir itens aqui usando binding {OrcamentoModel>Zpdsol}-->
+						<items >
+							<ColumnListItem type="Navigation"
+											press="onItemPress"
+											detailPress="onItemPress"
+											>
+								<cells >
+									<Text text="{OrcamentoModel>Zpdsol}" />
+									<Text text="{
+												path: 'OrcamentoModel>Cpudt',
+												formatter: '.formatDate'}" />									
+									<Text text="{OrcamentoModel>Dcorc}"/>
+									<Text text="{OrcamentoModel>Bukrs}"/>
+									<Text text="{OrcamentoModel>Pargb}"/>
+									<Text text="{
+												path: 'OrcamentoModel>Mojah',
+												formatter: '.formatMesAno'}" />										
+									<Text text="{
+												path: 'OrcamentoModel>Sname',
+												formatter: '.formatName1'}"/>
+									<!--<Text text="{
+												path: 'OrcamentoModel>Wrbtr',
+												formatter: '.formatCurrency'
+											}"/>-->
+									<Text text="{ parts: [{path: 'OrcamentoModel>Wrbtr'}, {path: 'BRL'}] , type:'sap.ui.model.type.Currency' }" />
+
+									<Text text="{OrcamentoModel>Dstats}"/>
+									<!--<Text text="{OrcamentoModel>Sgtxt}"/>-->
+									<!--<Text text="{OrcamentoModel>Cname}"/>-->
+									<Button class=".textSize"
+												press=".handlePopoverPress"
+												type="{
+												path: 'OrcamentoModel>Zstats',
+												formatter: '.setButtonColor'												
+												}"
+												text="{
+												path: 'OrcamentoModel>Cname',
+												formatter: '.formatName1'}"/>
+								</cells>
+							</ColumnListItem>
+
+						</items>
+
+					</Table>
+				<!--</HBox>-->
+			</content>
+
+			<footer>
+				<Toolbar>
+					<ToolbarSpacer/>
+					<Button text="Voltar"
+						type="Back"
+						press="onVoltar">
+					</Button>
+					<ToolbarSeparator ></ToolbarSeparator>
+					<Button text="{i18n>cria_solic}" type="Default" icon="sap-icon://create-form"
+						press="onCriaSolic">
+					</Button>							
+				</Toolbar>
+			</footer>			
+			
+
+		</Page>
+			</pages>
+		</App>
+	</Shell>
+</mvc:View>
